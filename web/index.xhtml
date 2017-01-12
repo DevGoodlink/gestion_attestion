@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <h:head>
+        <title>Gest Attestation</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"/>
+        <link rel="stylesheet" href="asset/css/css.css"/>
+        <style>
+            video { 
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                min-width: 100%;
+                min-height: 100%;
+                width: auto;
+                height: auto;
+                z-index: -100;
+                transform: translateX(-50%) translateY(-50%);
+                /*background: url('asset/videos/video_background.mp4') no-repeat;*/
+                background-size: cover;
+                transition: 1s opacity;
+            }
+        </style>
+        <script src="https://use.fontawesome.com/2ac2c5a436.js"></script>
+    </h:head>
+    <h:body>
+
+        <div class="container">
+            <video id="bgvid" playsinline="true" autoplay="true" muted="true" loop="true" 
+                   src="asset/videos/video_background.mp4" type="video/mp4">
+                <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
+            </video>
+            <div class="vbuffer"/>
+            <div class="vbuffer"/>
+            <div class="vbuffer"/>
+
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 dialog">
+                    <div class="titre">
+                        <h1>GESTION DES ATTESTATIONS</h1>
+                        <i class="fa fa-key fa-5x" aria-hidden="true"></i>
+                    </div>
+
+                    <div class="vbuffer"/>
+
+                    <h:form>
+                        <div class="form-group">
+                            <label>Login</label>
+                            <h:inputText id="txtlogin" value="#{controlerLogin.login}" styleClass="form-control"/>
+                            <h:message for="txtlogin" styleClass="error"></h:message>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mot de passe</label>
+                            <h:inputSecret id="txtpassword" value="#{controlerLogin.password}" styleClass="form-control"/>
+                            <h:message for="txtpassword" styleClass="error"></h:message>
+                        </div>
+                        <div class="col-md-6 col-md-offset-3">
+                            <h:commandButton action="#{controlerLogin.doVerification}" id="btnValidate" value="Valider" styleClass="btn btn-primary"/>&nbsp;&nbsp;
+                            <h:button id="btnReset" value="Réinitialiser" styleClass="btn btn-primary btn-success"/>
+                            <h:message for="btnValidate" styleClass="error"></h:message>
+                        </div>
+
+                    </h:form>
+                </div>
+            </div>
+
+        </div>
+
+    </h:body>
+</html>
+

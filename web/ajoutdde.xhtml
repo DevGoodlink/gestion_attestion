@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      >
+    <head>
+        <title>Ajouter demande</title>
+        <!-- Latest compiled and minified CSS -->
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"/>
+        <script src="https://use.fontawesome.com/2ac2c5a436.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <h:outputStylesheet name="common-style.css" library="css" />
+    </head>
+
+    <h:body>
+
+        <div class="container">
+            <div class="row top-head">
+                <div class="col-md-10 ">
+                    <h1>Gestion des attestations </h1>
+
+                </div>
+
+                <div class="col-md-2 vcenter">
+                    <span class="notif">
+                        <p class="text-right">
+                            <h:form>
+                                <h:commandLink action="notifcation"><i class="fa fa-bell-o fa-2x" aria-hidden="true"/></h:commandLink>  
+                                <h:commandLink action ="logout"><i class="fa fa-sign-out fa-2x" aria-hidden="true"/></h:commandLink>
+                            </h:form>
+                        </p>
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 side-menu">
+
+                    <span class="notif">
+                        <i class="fa fa-user fa-2x" aria-hidden="true"/>&nbsp;<h:outputLabel value="Bienvenue : "/>
+                        <h:outputText value="#{controlerLogin.login}"/>
+                    </span>
+                    <h:form>
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" >Gestion des utilisateurs</a>
+                                    </h4>
+                                </div>
+                                <div id="collapse1" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <h:commandLink value="Ajout" action="addUser"/>
+                                        <hr/>
+                                        <h:commandLink value="Modification" action="updateUser"/>
+                                        <hr/>
+                                        <h:commandLink value="Suppression" action="deleteUser"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Gestion des demandes</a>
+                                    </h4>
+                                </div>
+                                <div id="collapse2" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <h:commandLink value="Ajout" action="addDemande"/>
+                                        <hr/>
+                                        <h:commandLink value="Vérification" action="checkDemande"/>
+                                        <hr/>
+                                        <h:commandLink value="Validation" action="validateDemande"/>
+                                        <hr/>
+                                        <h:commandLink value="Suppression" action="deleteDemande"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Gestion des attestations</a>
+                                    </h4>
+                                </div>
+                                <div id="collapse3" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <h:commandLink value="Ajout" action="addDemande"/>
+                                        <hr/>
+                                        <h:commandLink value="Vérification" action="checkDemande"/>
+                                        <hr/>
+                                        <h:commandLink value="Validation" action="validateDemande"/>
+                                        <hr/>
+                                        <h:commandLink value="Suppression" action="deleteDemande"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </h:form>
+                </div>
+                <div class="col-md-9">
+                    <nav class="breadcrumb">
+                        <a class="breadcrumb-item" href="home.xhtml"><i class="fa fa-home fa-2x" aria-hidden="true"/>Home</a>
+                        <a class="breadcrumb-item" href="ajoutdde.xhtml">Ajouter demande</a>
+                    </nav>
+                    <p:separator/>
+                    <div class="row">
+                        <h:form>
+                            <p:dataTable id="tbl" var="dde" value="#{controllerAjout.lstDde}"
+                                         
+                                         paginator="true" rows="10" style="margin-bottom:20px">
+
+                                <f:facet name="{Exporters}">
+                                    <h:commandLink>
+                                        <p:graphicImage name="/demo/images/excel.png" width="24"/>
+                                        <p:dataExporter type="xls" target="tbl" fileName="dde_attestation" />
+                                    </h:commandLink>
+
+                                    <h:commandLink>
+                                        <p:graphicImage name="/demo/images/pdf.png" width="24"/>
+                                        <p:dataExporter type="pdf" target="tbl" fileName="dde_attestation"/>
+                                    </h:commandLink>
+
+                                    <h:commandLink>
+                                        <p:graphicImage name="/demo/images/csv.png" width="24"/>
+                                        <p:dataExporter type="csv" target="tbl" fileName="dde_attestation" />
+                                    </h:commandLink>
+
+                                    <h:commandLink>
+                                        <p:graphicImage name="/demo/images/xml.png" width="24"/>
+                                        <p:dataExporter type="xml" target="tbl" fileName="dde_attestation" />
+                                    </h:commandLink>
+                                </f:facet>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="ID" />
+                                    </f:facet>
+                                    <h:outputText value="#{dde.id}" />
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nom"/>
+                                    </f:facet>
+                                    <h:outputText value="#{dde.stagiaire.nom}" />
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Brand" />
+                                    </f:facet>
+                                    <h:outputText value="#{dde.stagiaire.prenom}" />
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Color" />
+                                    </f:facet>
+                                    <h:outputText value="#{dde.stagiaire.f.libelle}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Color" />
+                                    </f:facet>
+                                    <h:outputText value="#{dde.stagiaire.email}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Color" />
+                                    </f:facet>
+                                    <h:outputText value="#{dde.dateDemande}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Color" />
+                                    </f:facet>
+                                    <h:outputText value="#{dde.status}" />
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+
